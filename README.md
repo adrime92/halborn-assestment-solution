@@ -34,9 +34,9 @@ Variables
 
 As inspiration for the configuration of each component of the solution check the *Default* values: 
 
-- [Nginx *Default*s](./ansible-role-nginx/*Default*s/main.yml)
-- [Fluent-bit *Default*s](./ansible-role-fluentBit/*Default*s/main.yml)
-- [CloudWatch *Default*s](./ansible-role-cloudWatch/*Default*s/main.yml)
+- [Nginx *Default*s](./ansible-role-nginx/Defaults/main.yml)
+- [Fluent-bit *Default*s](./ansible-role-fluentBit/Defaults/main.yml)
+- [CloudWatch *Default*s](./ansible-role-cloudWatch/Defaults/main.yml)
 
 #### nginx variables
 - `namespace`: Namespace to be created where the nginx workload would be deployed. *Default* "nginx"
