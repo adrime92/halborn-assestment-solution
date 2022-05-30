@@ -1,13 +1,13 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ load_balancer_name }}
+  name: {{ nginx_load_balancer_name }}
 spec:
   type: LoadBalancer
   selector:
-    app: {{ label_app }}
+    app: {{ nginx_label_app }}
   ports:
     - protocol: TCP
-      nodePort: {{ node_port }}
-      port: {{ external_port }}
-      targetPort: {{ container_port_name }}
+      nodePort: {{ nginx_node_port }}
+      port: {{ nginx_external_port }}
+      targetPort: {{ nginx_container_port_name }}

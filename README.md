@@ -97,11 +97,15 @@ Default configurations:
 - `force_flush_interval`: Specifies in seconds the maximum amount of time that metrics remain in the memory buffer before being sent to the server. ***Default*** ```5```
 - `k8s_cluster_name`: EKS cluster name (Needed for cloudWatch agent configuration). ***Default*** ```"EKS-Dev-env"```
 
-#### AWS Cli config
+#### Aditional variables
+- `install_prerequisites`: Flag to install or not the prerequisites using the install_prerequisites.yml. ***Default*** ```False```
+
+#### AWS Cli config -- This variables are not needed if ```install_prerequisites``` is set to ```False```
 - `aws_region`:  AWS region. ***Default*** ```None```
 - `aws_format`:  Output format for AWS cli. ***Default*** ```None```
+- `vault_aws_access_key`: AWS access key. ***Default*** ```None```
+- `vault_aws_secret_key`: AWS secret key. ***Default*** ```None```
 
-Improvements
 -----------
 - Use secure protocol HTTPS for the nginx load balancer.
 - Automatize the policy attachment to the EC2 Role.
