@@ -13,7 +13,6 @@ nginx_container_port_name: "nginx-port"
 # Default vars for Fluent-bit
 fluentBit_service_account_name: "fluent-bit"
 fluentBit_daemonset_name: "fluent-bit"
-fluentBit_configmap_name: "fluent-bit-config"
 fluentBit_namespace: "amazon-cloudwatch"
 fluentBit_k8s_cluster_name: "halborn-dev-env"
 fluentBit_logs_region: "eu-west-3"

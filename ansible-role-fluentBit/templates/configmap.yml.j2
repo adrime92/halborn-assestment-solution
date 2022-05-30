@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: {{ fluentBit_configmap_name }}
+  name: fluent-bit-config
   namespace: {{ fluentBit_namespace }}
   labels:
     k8s-app: fluent-bit

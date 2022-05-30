@@ -109,6 +109,7 @@ Default configurations:
 -----------
 - Use secure protocol HTTPS for the nginx load balancer.
 - Automatize the policy attachment to the EC2 Role.
+- Implement unitary and integration tests.
 
 Sources
 ---------

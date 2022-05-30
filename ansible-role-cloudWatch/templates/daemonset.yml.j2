@@ -2,19 +2,19 @@
 apiVersion: apps/v1
 kind: DaemonSet
 metadata:
-  name: "{{ cloudWatch_daemon_set_name }}"
-  namespace: "{{ cloudWatch_namespace }}"
+  name: {{ cloudWatch_daemon_set_name }}
+  namespace: {{ cloudWatch_namespace }}
 spec:
   selector:
     matchLabels:
-      name: "{{ cloudWatch_daemon_set_name }}"
+      name: {{ cloudWatch_daemon_set_name }}
   template:
     metadata:
       labels:
-        name: "{{ cloudWatch_daemon_set_name }}"
+        name: {{ cloudWatch_daemon_set_name }}
     spec:
       containers:
-        - name: "{{ cloudWatch_daemon_set_name }}"
+        - name: {{ cloudWatch_daemon_set_name }}
           image: amazon/cloudwatch-agent:1.247350.0b251780
           resources:
             limits:
@@ -84,4 +84,4 @@ spec:
           hostPath:
             path: /dev/disk/
       terminationGracePeriodSeconds: 60
-      serviceAccountName: "{{ cloudWatch_service_account_name }}"
+      serviceAccountName: {{ cloudWatch_service_account_name }}

@@ -1,8 +1,8 @@
 # create configmap for cwagent config
 kind: ConfigMap
 metadata:
-  name: "{{ cloudWatch_configmap_name }}"
-  namespace: "{{ cloudWatch_namespace }}"
+  name: {{ cloudWatch_configmap_name }}
+  namespace: {{ cloudWatch_namespace }}
 apiVersion: v1
 data:
   cwagentconfig.json: |
