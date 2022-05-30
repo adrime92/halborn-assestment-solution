@@ -21,7 +21,7 @@ During EKS deployment AWS manage the creation of a role which is attached to the
 
 Variables
 ---------
-## Terraform Vars
+### Terraform Vars
 
 - `region`: AWS region. Default "eu-west-3"
 - `eks_cluster_name`: EKS cluster name. Default "EKS-Dev-env"
@@ -30,7 +30,7 @@ Variables
 Default values in:
 - [EKS Defaults](./eks-deployment/var.tf)
 
-## Ansible Roles Vars
+### Ansible Roles Vars
 
 For inspiring yourselves of the configuration of each component of the solution check the default values: 
 
@@ -38,7 +38,7 @@ For inspiring yourselves of the configuration of each component of the solution 
 - [Fluent-bit Defaults](./ansible-role-fluentBit/defaults/main.yml)
 - [CloudWatch Defaults](./ansible-role-cloudWatch/defaults/main.yml)
 
-### nginx variables
+#### nginx variables
 - `namespace`: Namespace to be created where the nginx workload would be deployed. Default "nginx"
 - `deployment_name`: Name that the nginx deployment would have on the EKS cluster.Default "nginx-deployment"
 - `load_balancer_name`: Name of the load balancer to be created on the EKS cluster.Default "nginx-deployment"
@@ -50,7 +50,7 @@ For inspiring yourselves of the configuration of each component of the solution 
 - `container_port`: Port used by the nginx container. Default "80"
 - `container_port_name`: Name given to the container port. Default "nginx-port"
 
-### Default vars for Fluent-bit
+#### Default vars for Fluent-bit
 - `service_account_name`: Username for the service account. Default "fluent-bit"
 - `daemonset_name`: Name given to the daemonset. Default "fluent-bit"
 - `configmap_name`: Name given to the main fluent bit configmap. Default "fluent-bit-config"
@@ -58,7 +58,7 @@ For inspiring yourselves of the configuration of each component of the solution 
 - `k8s_cluster_name`: EKS cluster name (Needed for fluent-bit agent configuration).Default "EKS-Dev-env"
 - `logs_region`: Region from where logs would be taken. Default "eu-west-3"
 
-### Default vars for cloudwatch agent
+#### Default vars for cloudwatch agent
 - `namespace`: Namespace to be created where the fluent-bit agent would be deployed. Default "amazon-cloudwatch"
 - `service_account_name`: Username for the service account. Default "cloudwatch-agent"
 - `daemon_set_name`: Name given to the daemonset. Default "cloudwatch-agent"
@@ -68,7 +68,7 @@ For inspiring yourselves of the configuration of each component of the solution 
 - `force_flush_interval`: Specifies in seconds the maximum amount of time that metrics remain in the memory buffer before being sent to the server. Default 5
 - `k8s_cluster_name`: EKS cluster name (Needed for cloudWatch agent configuration).Default "EKS-Dev-env"
 
-### Global vars
+#### Global vars
 - `aws_region`:  AWS region. Default None
 - `aws_format`:  Output format for AWS cli. Default None
 
