@@ -1,0 +1,16 @@
+---
+stages:
+  - prepare
+  - versions
+  - lint
+  - deploy
+  - test
+
+variables:
+  ANSIBLE_VAULT_PASSWORD_FILE: ".vault_pass"
+  ANSIBLE_VERBOSITY: "2"
+
+before_script:
+  - cd deployments/$DEPLOY_ENV
+  - echo $VAULT_PASS > .vault_pass
+  - ansible-galaxy install -r requirements.yml -p roles

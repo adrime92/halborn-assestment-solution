@@ -1,0 +1,24 @@
+---
+- name: Create cloudWatch namespace
+  kubernetes.core.k8s:
+    state: present
+    template: ../templates/namespace.yml.j2
+    namespace: "{{ namespace }}"
+
+- name: Create cloudWatch serviceAccount
+  kubernetes.core.k8s:
+    state: present
+    template: ../templates/serviceAccount.yml.j2
+    namespace: "{{ namespace }}"
+
+- name: Create cloudWatch configmap
+  kubernetes.core.k8s:
+    state: present
+    template: ../templates/configmap.yml.j2
+    namespace: "{{ namespace }}"
+
+- name: Deploy cloudWatch agent as a daemoset
+  kubernetes.core.k8s:
+    state: present
+    template: ../templates/daemonset.yml.j2
+    namespace: "{{ namespace }}"

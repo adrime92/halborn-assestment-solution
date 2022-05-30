@@ -1,0 +1,32 @@
+# nginx variables
+namespace: "nginx-dev"
+deployment_name: "nginx-deployment"
+load_balancer_name: "nginx-service-loadbalancer"
+label_app: "nginx"
+replicas: 2
+image:  "adrisan92/adri-nginx:1.0"
+node_port: 30001
+external_port: 8080
+container_port: 80
+container_port_name: "nginx-port"
+
+# Default vars for Fluent-bit
+service_account_name: "fluent-bit"
+daemonset_name: "fluent-bit"
+configmap_name: "fluent-bit-config"
+namespace: "amazon-cloudwatch"
+k8s_cluster_name: "SA-Dev-env"
+logs_region: "eu-west-3"
+
+# Default vars for cloudwatch agent
+namespace: "amazon-cloudwatch"
+service_account_name: "cloudwatch-agent"
+daemon_set_name: "cloudwatch-agent"
+configmap_name: "cwagentconfig"
+label_name: "amazon-cloudwatch"
+metrics_collection_interval: 60
+force_flush_interval: 5
+k8s_cluster_name: "halborn-dev-env"
+
+aws_region: "eu-west-3"
+aws_format: "JSON"

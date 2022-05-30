@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: fluent-bit-cluster-info
+  namespace: {{ namespace }}
+data:
+  cluster.name: {{ k8s_cluster_name }}
+  http.port: ""
+  http.server: "Off"
+  logs.region: {{ logs_region }}
+  read.head: "Off"
+  read.tail: "On"

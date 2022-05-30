@@ -1,0 +1,15 @@
+---
+- name: Deploy bundle
+  hosts: localhost
+  connection: local
+  pre_tasks:
+    - name: Install Prerequisites 
+      import_tasks: install_rerequisites.yml
+    - name: init eks-deployment module
+      shell: terraform init ../eks-deployment/
+    - name: Deploy EKS
+      shell: terraform apply ../eks-deployment/ -auto-approve
+  roles:
+    - role: ../ansible-role-nginx
+    - role: ../ansible-role-cloudWatch
+    - role: ../ansible-role-fluentBit

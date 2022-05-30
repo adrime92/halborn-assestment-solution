@@ -1,0 +1,12 @@
+---
+# defaults file for nginx
+namespace: "nginx"
+deployment_name: "nginx-deployment"
+load_balancer_name: "nginx-service-loadbalancer"
+label_app: "nginx"
+replicas: 2
+image:  "adrisan92/adri-nginx:1.0"
+node_port: 30001
+external_port: 8080
+container_port: 80
+container_port_name: "nginx-port"

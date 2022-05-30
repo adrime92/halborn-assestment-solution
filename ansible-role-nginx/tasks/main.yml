@@ -1,0 +1,18 @@
+- name: Create nginx namespace
+  kubernetes.core.k8s:
+    name: nginx
+    api_version: v1
+    kind: Namespace
+    state: present
+
+- name: Create nginx deployment
+  kubernetes.core.k8s:
+    state: present
+    template: ../templates/deployment.yml.j2
+    namespace: "{{ namespace }}"
+
+- name: Create Load balancer for making prometheus reachable from the internet
+  kubernetes.core.k8s:
+    state: present
+    template: ../templates/loadBalancer.yml.j2
+    namespace: "{{ namespace }}"
