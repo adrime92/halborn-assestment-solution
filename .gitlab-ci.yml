@@ -52,9 +52,6 @@ test:
     - cd tests
     - >
       py.test -s -v --connection=ansible --ansible-inventory=hosts.yml test_solution.py
-  artifacts:
-    reports:
-      junit: tests/reports/awx_tests.xml
 
 final_destroy:
   stage: final_destroy

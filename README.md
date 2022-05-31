@@ -68,34 +68,34 @@ Default configurations:
 - [CloudWatch Default](./ansible-role-cloudWatch/Defaults/main.yml)
 
 #### nginx variables
-- `namespace`: Namespace to be created where the nginx workload would be deployed. ***Default*** ```"nginx"```
-- `deployment_name`: Name that the nginx deployment would have on the EKS cluster. ***Default*** ```"nginx-deployment"```
-- `load_balancer_name`: Name of the load balancer to be created on the EKS cluster. ***Default*** ```"nginx-deployment"```
-- `label_app`: Label added to the deployment. ***Default*** ```"nginx"```
-- `replicas`: Number of replicas to be deployed within the deployment. ***Default*** ```2```
-- `image`:  Nginx image to be deployed. ***Default*** ```"adrisan92/adri-nginx:1.0"```
-- `node_port`: Kubernetes nodePort. ***Default*** ```"30001"```
-- `external_port`: Port exposed to the end user. ***Default*** ```"8080"```
-- `container_port`: Port used by the nginx container. ***Default*** ```"80"```
-- `container_port_name`: Name given to the container port. ***Default*** ```"nginx-port"```
+- `nginx_namespace`: Namespace to be created where the nginx workload would be deployed. ***Default*** ```"nginx"```
+- `nginx_deployment_name`: Name that the nginx deployment would have on the EKS cluster. ***Default*** ```"nginx-deployment"```
+- `nginx_load_balancer_name`: Name of the load balancer to be created on the EKS cluster. ***Default*** ```"nginx-deployment"```
+- `nginx_label_app`: Label added to the deployment. ***Default*** ```"nginx"```
+- `nginx_replicas`: Number of replicas to be deployed within the deployment. ***Default*** ```2```
+- `nginx_image`:  Nginx image to be deployed. ***Default*** ```"adrisan92/adri-nginx:1.0"```
+- `nginx_node_port`: Kubernetes nodePort. ***Default*** ```"30001"```
+- `nginx_external_port`: Port exposed to the end user. ***Default*** ```"8080"```
+- `nginx_container_port`: Port used by the nginx container. ***Default*** ```"80"```
+- `nginx_container_port_name`: Name given to the container port. ***Default*** ```"nginx-port"```
 
 #### *Default* vars for Fluent-bit
-- `service_account_name`: Username for the service account. ***Default*** ```"fluent-bit"```
-- `daemonset_name`: Name given to the daemonset. ***Default*** ```"fluent-bit"```
-- `configmap_name`: Name given to the main fluent bit configmap. ***Default*** ```"fluent-bit-config"```
-- `namespace`: Namespace to be created where the fluent-bit agent would be deployed. ***Default*** ```"amazon-cloudwatch"```
-- `k8s_cluster_name`: EKS cluster name (Needed for fluent-bit agent configuration). ***Default*** ```"EKS-Dev-env"```
-- `logs_region`: Region from where logs would be taken. ***Default*** ```"eu-west-3"```
+- `fluentBit_service_account_name`: Username for the service account. ***Default*** ```"fluent-bit"```
+- `fluentBit_daemonset_name`: Name given to the daemonset. ***Default*** ```"fluent-bit"```
+- `fluentBit_configmap_name`: Name given to the main fluent bit configmap. ***Default*** ```"fluent-bit-config"```
+- `fluentBit_namespace`: Namespace to be created where the fluent-bit agent would be deployed. ***Default*** ```"amazon-cloudwatch"```
+- `fluentBit_k8s_cluster_name`: EKS cluster name (Needed for fluent-bit agent configuration). ***Default*** ```"EKS-Dev-env"```
+- `fluentBit_logs_region`: Region from where logs would be taken. ***Default*** ```"eu-west-3"```
 
 #### *Default* vars for cloudwatch agent
-- `namespace`: Namespace to be created where the fluent-bit agent would be deployed. ***Default*** ```"amazon-cloudwatch"```
-- `service_account_name`: Username for the service account. ***Default*** ```"cloudwatch-agent"```
-- `daemon_set_name`: Name given to the daemonset. ***Default*** ```"cloudwatch-agent"```
-- `configmap_name`: Name given to the main fluent bit configmap. ***Default*** ```"cwagentconfig"```
-- `label_name`: Label added to the deployment. ***Default*** ```"amazon-cloudwatch"```
-- `metrics_collection_interval`: Specifies how often all metrics specified in this configuration file are to be collected. ***Default*** ```60```
-- `force_flush_interval`: Specifies in seconds the maximum amount of time that metrics remain in the memory buffer before being sent to the server. ***Default*** ```5```
-- `k8s_cluster_name`: EKS cluster name (Needed for cloudWatch agent configuration). ***Default*** ```"EKS-Dev-env"```
+- `cloudWatch_namespace`: Namespace to be created where the fluent-bit agent would be deployed. ***Default*** ```"amazon-cloudwatch"```
+- `cloudWatch_service_account_name`: Username for the service account. ***Default*** ```"cloudwatch-agent"```
+- `cloudWatch_daemon_set_name`: Name given to the daemonset. ***Default*** ```"cloudwatch-agent"```
+- `cloudWatch_configmap_name`: Name given to the main fluent bit configmap. ***Default*** ```"cwagentconfig"```
+- `cloudWatch_label_name`: Label added to the deployment. ***Default*** ```"amazon-cloudwatch"```
+- `cloudWatch_metrics_collection_interval`: Specifies how often all metrics specified in this configuration file are to be collected. ***Default*** ```60```
+- `cloudWatch_force_flush_interval`: Specifies in seconds the maximum amount of time that metrics remain in the memory buffer before being sent to the server. ***Default*** ```5```
+- `cloudWatch_k8s_cluster_name`: EKS cluster name (Needed for cloudWatch agent configuration). ***Default*** ```"EKS-Dev-env"```
 
 #### Aditional variables
 - `install_prerequisites`: Flag to install or not the prerequisites using the install_prerequisites.yml. ***Default*** ```False```
