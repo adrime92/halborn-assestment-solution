@@ -1,0 +1,19 @@
+- name: Deploy bundle
+  hosts: localhost
+  connection: local
+  tasks:
+    - name: Create nginx namespace
+      kubernetes.core.k8s:
+        name: "{{ nginx_namespace }}"
+        api_version: v1
+        kind: Namespace
+        state: absent
+      with_items:
+        - "{{ nginx_namespace }}"
+        - "{{ cloudWatch_namespace }}"
+    - name: Eliminate problematic resource from tfstate
+      shell: terraform -chdir=../eks-deployment state rm module.eks.kubernetes_config_map.aws_auth
+      
+    - name: Destroy EKS
+      shell: terraform -chdir=../eks-deployment destroy -var-file="../test/var.tf" -auto-approve 
+    
