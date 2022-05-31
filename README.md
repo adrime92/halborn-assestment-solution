@@ -25,7 +25,7 @@ Tested versions:
 How to use it
 ------------
 
-(Theoretically) The repository is intended to run automatically either by Jenkins or gitlab-ci. As soon as a new commit is populated to the SCM the pipelines should start deploying the Development environment.
+(Theoretically) The repository is intended to run automatically either by gitlab-ci. As soon as a new commit is populated to the SCM the pipelines should start deploying the Development environment.
 
 In case you want to run it manually:
 1. Clone the repository:
@@ -40,7 +40,7 @@ ansible-vault encrypt test/group_vars/all/vault.yml
 ```
 5. Run the playbook: 
 ```console 
-ansible-playbook test/main.yml --ask-vault-pass
+ansible-playbook test/test_installation.yml --ask-vault-pass
 ```
 
 Considerations
@@ -106,6 +106,7 @@ Default configurations:
 - `vault_aws_access_key`: AWS access key. ***Default*** ```None```
 - `vault_aws_secret_key`: AWS secret key. ***Default*** ```None```
 
+Next steps
 -----------
 - Use secure protocol HTTPS for the nginx load balancer.
 - Automatize the policy attachment to the EC2 Role.

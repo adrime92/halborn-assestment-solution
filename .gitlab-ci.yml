@@ -58,5 +58,3 @@ final_destroy:
   script:
     - cd tests
     - ansible-playbook test_uninstall.yml
-
-
