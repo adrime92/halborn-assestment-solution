@@ -12,7 +12,36 @@ This solution deploys an EKS cluster on AWS. On top of that kubernetes cluster t
 Requirements
 ------------
 
+- Python
+- Ansible
+- Terraform
 - AWS account
+
+Tested versions: 
+- Python 3.7.3
+- ansible 2.9.10
+- Terraform v0.14.7
+
+How to use it
+------------
+
+(Theoretically) The repository is intended to run automatically either by Jenkins or gitlab-ci. As soon as a new commit is populated to the SCM the pipelines should start deploying the Development environment.
+
+In case you want to run it manually:
+1. Clone the repository:
+```console
+git clone https://github.com/adrime92/halborn-assestment-solution.git
+```
+2. Install the packages mentioned in the requirement section.
+3. Fill the variables in the ```test/group_vars/all/main.yml``` and ```test/group_vars/all/vault.yml```
+4. (Optional) Encrypt your ansible vault: 
+```console 
+ansible-vault encrypt test/group_vars/all/vault.yml
+```
+5. Run the playbook: 
+```console 
+ansible-playbook test/main.yml --ask-vault-pass
+```
 
 Considerations
 ------------
@@ -23,60 +52,64 @@ Variables
 ---------
 ### Terraform Vars
 
-- `region`: AWS region. *Default* "eu-west-3"
-- `eks_cluster_name`: EKS cluster name. *Default* "EKS-Dev-env"
-- `vpc_name`: VPC name. *Default* "
+- `region`: AWS region. ***Default*** ```"eu-west-3"```
+- `eks_cluster_name`: EKS cluster name. ***Default*** ```"EKS-Dev-env"```
+- `vpc_name`: VPC name. ***Default*** ```"EKS-Dev-env"```
 
-*Default* values in:
+Default configuration:
 - [EKS *Default*s](./eks-deployment/var.tf)
 
 ### Ansible Roles Vars
 
-As inspiration for the configuration of each component of the solution check the *Default* values: 
+Default configurations: 
 
-- [Nginx *Default*s](./ansible-role-nginx/Defaults/main.yml)
-- [Fluent-bit *Default*s](./ansible-role-fluentBit/Defaults/main.yml)
-- [CloudWatch *Default*s](./ansible-role-cloudWatch/Defaults/main.yml)
+- [Nginx Default](./ansible-role-nginx/Defaults/main.yml)
+- [Fluent-bit Default](./ansible-role-fluentBit/Defaults/main.yml)
+- [CloudWatch Default](./ansible-role-cloudWatch/Defaults/main.yml)
 
 #### nginx variables
-- `namespace`: Namespace to be created where the nginx workload would be deployed. *Default* "nginx"
-- `deployment_name`: Name that the nginx deployment would have on the EKS cluster.*Default* "nginx-deployment"
-- `load_balancer_name`: Name of the load balancer to be created on the EKS cluster.*Default* "nginx-deployment"
-- `label_app`: Label added to the deployment. *Default* "nginx"
-- `replicas`: Number of replicas to be deployed within the deployment. *Default* 2
-- `image`:  Nginx image to be deployed. *Default* "adrisan92/adri-nginx:1.0"
-- `node_port`: Kubernetes nodePort. *Default* "30001"
-- `external_port`: Port exposed to the end user. *Default* "8080"
-- `container_port`: Port used by the nginx container. *Default* "80"
-- `container_port_name`: Name given to the container port. *Default* "nginx-port"
+- `nginx_namespace`: Namespace to be created where the nginx workload would be deployed. ***Default*** ```"nginx"```
+- `nginx_deployment_name`: Name that the nginx deployment would have on the EKS cluster. ***Default*** ```"nginx-deployment"```
+- `nginx_load_balancer_name`: Name of the load balancer to be created on the EKS cluster. ***Default*** ```"nginx-deployment"```
+- `nginx_label_app`: Label added to the deployment. ***Default*** ```"nginx"```
+- `nginx_replicas`: Number of replicas to be deployed within the deployment. ***Default*** ```2```
+- `nginx_image`:  Nginx image to be deployed. ***Default*** ```"adrisan92/adri-nginx:1.0"```
+- `nginx_node_port`: Kubernetes nodePort. ***Default*** ```"30001"```
+- `nginx_external_port`: Port exposed to the end user. ***Default*** ```"8080"```
+- `nginx_container_port`: Port used by the nginx container. ***Default*** ```"80"```
+- `nginx_container_port_name`: Name given to the container port. ***Default*** ```"nginx-port"```
 
 #### *Default* vars for Fluent-bit
-- `service_account_name`: Username for the service account. *Default* "fluent-bit"
-- `daemonset_name`: Name given to the daemonset. *Default* "fluent-bit"
-- `configmap_name`: Name given to the main fluent bit configmap. *Default* "fluent-bit-config"
-- `namespace`: Namespace to be created where the fluent-bit agent would be deployed. *Default* "amazon-cloudwatch"
-- `k8s_cluster_name`: EKS cluster name (Needed for fluent-bit agent configuration).*Default* "EKS-Dev-env"
-- `logs_region`: Region from where logs would be taken. *Default* "eu-west-3"
+- `fluentBit_service_account_name`: Username for the service account. ***Default*** ```"fluent-bit"```
+- `fluentBit_daemonset_name`: Name given to the daemonset. ***Default*** ```"fluent-bit"```
+- `fluentBit_configmap_name`: Name given to the main fluent bit configmap. ***Default*** ```"fluent-bit-config"```
+- `fluentBit_namespace`: Namespace to be created where the fluent-bit agent would be deployed. ***Default*** ```"amazon-cloudwatch"```
+- `fluentBit_k8s_cluster_name`: EKS cluster name (Needed for fluent-bit agent configuration). ***Default*** ```"EKS-Dev-env"```
+- `fluentBit_logs_region`: Region from where logs would be taken. ***Default*** ```"eu-west-3"```
 
 #### *Default* vars for cloudwatch agent
-- `namespace`: Namespace to be created where the fluent-bit agent would be deployed. *Default* "amazon-cloudwatch"
-- `service_account_name`: Username for the service account. *Default* "cloudwatch-agent"
-- `daemon_set_name`: Name given to the daemonset. *Default* "cloudwatch-agent"
-- `configmap_name`: Name given to the main fluent bit configmap. *Default* "cwagentconfig"
-- `label_name`: Label added to the deployment. *Default* "amazon-cloudwatch"
-- `metrics_collection_interval`: Specifies how often all metrics specified in this configuration file are to be collected *Default* 60
-- `force_flush_interval`: Specifies in seconds the maximum amount of time that metrics remain in the memory buffer before being sent to the server. *Default* 5
-- `k8s_cluster_name`: EKS cluster name (Needed for cloudWatch agent configuration).*Default* "EKS-Dev-env"
+- `cloudWatch_namespace`: Namespace to be created where the fluent-bit agent would be deployed. ***Default*** ```"amazon-cloudwatch"```
+- `cloudWatch_service_account_name`: Username for the service account. ***Default*** ```"cloudwatch-agent"```
+- `cloudWatch_daemon_set_name`: Name given to the daemonset. ***Default*** ```"cloudwatch-agent"```
+- `cloudWatch_configmap_name`: Name given to the main fluent bit configmap. ***Default*** ```"cwagentconfig"```
+- `cloudWatch_label_name`: Label added to the deployment. ***Default*** ```"amazon-cloudwatch"```
+- `cloudWatch_metrics_collection_interval`: Specifies how often all metrics specified in this configuration file are to be collected. ***Default*** ```60```
+- `cloudWatch_force_flush_interval`: Specifies in seconds the maximum amount of time that metrics remain in the memory buffer before being sent to the server. ***Default*** ```5```
+- `cloudWatch_k8s_cluster_name`: EKS cluster name (Needed for cloudWatch agent configuration). ***Default*** ```"EKS-Dev-env"```
 
-#### Global vars
-- `aws_region`:  AWS region. *Default* None
-- `aws_format`:  Output format for AWS cli. *Default* None
+#### Aditional variables
+- `install_prerequisites`: Flag to install or not the prerequisites using the install_prerequisites.yml. ***Default*** ```False```
 
-Improvements
+#### AWS Cli config -- This variables are not needed if ```install_prerequisites``` is set to ```False```
+- `aws_region`:  AWS region. ***Default*** ```None```
+- `aws_format`:  Output format for AWS cli. ***Default*** ```None```
+- `vault_aws_access_key`: AWS access key. ***Default*** ```None```
+- `vault_aws_secret_key`: AWS secret key. ***Default*** ```None```
+
 -----------
 - Use secure protocol HTTPS for the nginx load balancer.
 - Automatize the policy attachment to the EC2 Role.
-
+- Implement unitary and integration tests.
 
 Sources
 ---------

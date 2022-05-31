@@ -1,8 +1,8 @@
 apiVersion: apps/v1
 kind: DaemonSet
 metadata:
-  name: {{ daemonset_name }}
-  namespace: {{ namespace }}
+  name: {{ fluentBit_daemonset_name }}
+  namespace: {{fluentBit_namespace }}
   labels:
     k8s-app: fluent-bit
     version: v1

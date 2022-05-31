@@ -1,7 +1,7 @@
 # Default vars for Fluent-bit
-service_account_name: "fluent-bit"
-daemonset_name: "fluent-bit"
-configmap_name: "fluent-bit-config"
-namespace: "amazon-cloudwatch"
-k8s_cluster_name: "EKS-Dev-env"
-logs_region: "eu-west-3"
+fluentBit_service_account_name: "fluent-bit"
+fluentBit_daemonset_name: "fluent-bit"
+fluentBit_configmap_name: "fluent-bit-config"
+fluentBit_namespace: "amazon-cloudwatch"
+fluentBit_k8s_cluster_name: "halborn-dev-env"
+fluentBit_logs_region: "eu-west-3"

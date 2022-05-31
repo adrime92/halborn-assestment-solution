@@ -1,9 +1,9 @@
 # Default vars for cloudwatch agent
-namespace: "amazon-cloudwatch"
-service_account_name: "cloudwatch-agent"
-daemon_set_name: "cloudwatch-agent"
-configmap_name: "cwagentconfig"
-label_name: "amazon-cloudwatch"
-metrics_collection_interval: 60
-force_flush_interval: 5
-k8s_cluster_name: "EKS-Dev-env"
+cloudWatch_namespace: "amazon-cloudwatch"
+cloudWatch_service_account_name: "cloudwatch-agent"
+cloudWatch_daemon_set_name: "cloudwatch-agent"
+cloudWatch_configmap_name: "cwagentconfig"
+cloudWatch_label_name: "amazon-cloudwatch"
+cloudWatch_metrics_collection_interval: 60
+cloudWatch_force_flush_interval: 5
+cloudWatch_k8s_cluster_name: "halborn-dev-env"

@@ -1,14 +1,16 @@
----
 - name: Deploy bundle
   hosts: localhost
   connection: local
   pre_tasks:
     - name: Install Prerequisites 
-      import_tasks: install_rerequisites.yml
+      import_tasks: install_prerequisties.yml
+      when: install_prerequisites == True
     - name: init eks-deployment module
-      shell: terraform init ../eks-deployment/
+      shell: terraform -chdir=../eks-deployment init 
     - name: Deploy EKS
-      shell: terraform apply ../eks-deployment/ -auto-approve
+      shell: terraform -chdir=../eks-deployment apply -var-file="../test/var.tf" -auto-approve
+    - name: Configure kubctl access to EKS
+      shell: aws eks --region {{ aws_region }} update-kubeconfig --name "{{ k8s_cluster_name }}"
   roles:
     - role: ../ansible-role-nginx
     - role: ../ansible-role-cloudWatch

@@ -1,8 +1,8 @@
 # create configmap for cwagent config
 kind: ConfigMap
 metadata:
-  name: "{{ configmap_name }}"
-  namespace: "{{ namespace }}"
+  name: {{ cloudWatch_configmap_name }}
+  namespace: {{ cloudWatch_namespace }}
 apiVersion: v1
 data:
   cwagentconfig.json: |
@@ -10,11 +10,11 @@ data:
       "logs": {
         "metrics_collected": {
           "kubernetes": {
-            "cluster_name": "{{ k8s_cluster_name }}",
-            "metrics_collection_interval": {{ metrics_collection_interval }}
+            "cluster_name": "{{ cloudWatch_k8s_cluster_name }}",
+            "metrics_collection_interval": {{ cloudWatch_metrics_collection_interval }}
           }
         },
-        "force_flush_interval": {{ force_flush_interval }}
+        "force_flush_interval": {{ cloudWatch_force_flush_interval }}
       }
     }
 

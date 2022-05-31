@@ -3,14 +3,60 @@ stages:
   - prepare
   - versions
   - lint
+  - initial_destroy
   - deploy
   - test
+  - destroy
+
+.runner:
+  image: gitlab/gitlab-runner
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "push"'
 
 variables:
   ANSIBLE_VAULT_PASSWORD_FILE: ".vault_pass"
   ANSIBLE_VERBOSITY: "2"
 
 before_script:
-  - cd deployments/$DEPLOY_ENV
+  - cd test
   - echo $VAULT_PASS > .vault_pass
-  - ansible-galaxy install -r requirements.yml -p roles
+#  - install prerequisites
+
+syntax_lint:
+  stage: lint
+  extends: .runner
+  script:
+    - cd tests
+    - ansible-lint test_install.yml
+    - ansible-lint test_uninstall.yml
+
+initial_destroy:
+  stage: initial_destroy
+  script:
+    - cd tests
+    - ansible-playbook test_uninstall.yml
+
+deploy:
+  stage: deploy
+  extends: .runner
+  environment:
+    name: development
+  script:
+    - cd tests
+    - ansible-playbook test_install.yml
+
+test:
+  stage: test
+  extends: .runner
+  script:
+    - cd tests
+    - >
+      py.test -s -v --connection=ansible --ansible-inventory=hosts.yml test_solution.py
+
+final_destroy:
+  stage: final_destroy
+  script:
+    - cd tests
+    - ansible-playbook test_uninstall.yml
+
+
